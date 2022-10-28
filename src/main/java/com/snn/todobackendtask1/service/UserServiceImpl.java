@@ -8,7 +8,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
@@ -34,7 +37,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<UserDto> getAll() {
-        return userRepository.findAll().stream().map(p -> userMapper.toDto(p)).toList();
+        return userRepository.findAll().stream().map(p -> userMapper.toDto(p)).collect(toList());
     }
 
     @Override
@@ -42,7 +45,7 @@ public class UserServiceImpl implements IUserService {
         User user = findById(dto.getId());
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
-
+        user.setUpdatedAt(LocalDateTime.now());
         userRepository.save(user);
     }
 

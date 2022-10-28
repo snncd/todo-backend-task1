@@ -3,6 +3,8 @@ package com.snn.todobackendtask1.controller;
 import com.snn.todobackendtask1.dto.UserDto;
 import com.snn.todobackendtask1.service.IUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping("/{id}")
-    public UserDto getById(@PathVariable Long id){
-        return userService.getById(id);
+    public ResponseEntity<UserDto> getById(@PathVariable Long id){
+        return ResponseEntity.ok(userService.getById(id));
     }
 
     @GetMapping
@@ -25,8 +27,9 @@ public class UserController {
     }
 
     @PostMapping
-    public void add(@RequestBody UserDto userDto){
+    public ResponseEntity add(@RequestBody UserDto userDto){
         userService.add(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping

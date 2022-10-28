@@ -20,7 +20,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.*;
 
 @Slf4j
-@RestControllerAdvice
+//@RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)

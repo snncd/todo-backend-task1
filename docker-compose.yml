@@ -1,0 +1,19 @@
+version: "3.1"
+
+services:
+  app:
+    container_name: todo-backend-task1
+    image: postgresdb_cont
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=todo
